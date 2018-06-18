@@ -1,0 +1,28 @@
+query SearchByCategory($category: String!){
+    nodeQuery(filter: {conditions: [{operator: EQUAL, field: "type", value: ["place"]}, {operator: EQUAL, field: "status", value: ["1"]}, {operator: EQUAL, field: "field_place_category.entity.name", value: [$category]}]}) {
+        entities {
+            ... on NodePlace {
+                title
+                fieldPlaceCategory {
+                    entity {
+                        entityLabel
+                    }
+                }
+                fieldPlaceDescription
+                fieldPlaceRating
+                fieldPlaceAddress {
+                    countryCode
+                    administrativeArea
+                    locality
+                    dependentLocality
+                    postalCode
+                    addressLine1
+                }
+                fieldPlacePriceRange
+                fieldPlaceImages {
+                    url
+                }
+            }
+        }
+    }
+}
